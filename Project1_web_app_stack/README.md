@@ -23,8 +23,6 @@ TOOLS:
 - MYSQL
 
 ### FLOW OF STACK
-<img src="images/devops-photo1">
-<br>
 "collection of services working together to put togehter experience"
 
 * user opens up browser enters IP address of load balancer
