@@ -16,11 +16,17 @@ TOOLS:
 * IDE - VSCode
 
 ### ARCHITECTURE:
-- NGINX
-- TOMCAT
-- RABBITMQ
-- MEMCACHED
-- MYSQL
+- NGINX - open source software for web serving, reverse proxying, caching, load balancing, media streaming, and more.
+- TOMCAT - Apache Tomcat is a web container. It allows the users to run Servlet and JAVA Server Pages that are based on the web-applications.
+- RABBITMQ - Queing service
+- MEMCACHED - in-memory data storage
+- MYSQL - RDBMS
+
+SUMMARY: manually set up: vagrant create VM automatically on Virtual box
+then logged into each machine and ran shell commands and set up services.
+
+Once stack ready, verified as user from browser, accessed nginx service then fowrad request to tomcat server then fowrard to message broker RABBITMQ, then to memcachD, then mysql server. Query got executed on tomcat, then cached to memcache server
+
 
 ### FLOW OF STACK
 "collection of services working together to put togehter experience"
@@ -144,4 +150,26 @@ WantedBy=multi-user.target
 ### STEP : CODEBUILD & DEPLOY (app01)
 1) git clone -b local-setup https://github.com/devopshydclub/vprofile-project.git
 2) vi src/main/resources/application.properties - *VERY IMPORTANT CONFIG FILE - changes for any username/pass for other servers
-3) 
+3) Build code (artifact) inside repo (vprofile-project) - 'mvn install'
+4) Deploy artifact
+5) copy artifact into tomcat root folder 
+6) start tomcat - systemctl start tomcat (application set to default tomcat app)
+
+### SETUP NGINX server - web01
+1) sudo apt-get nginx
+2) create config file - used to redirect requests from nygynx to tomcat (act like load balancer)
+3) delete default nginx config file
+4) Create link to new config file - ln -s | (enables site)
+5) restart nginx
+
+RECAP:
+* set up tools
+* clone source code
+* set up all services : mysql, memcached, tomcat, nginx, app build and deploy
+
+#### Verify website from browser
+1) ifconfig - 192.168.56.11 - login
+2) confirmed NGINX server, able to log into service - DB confirms it is working
+3) destroy stack 
+
+## NOW AUTOMATE SETUP:
