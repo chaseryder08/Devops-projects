@@ -1,5 +1,7 @@
 # Vprofile Project Setup
 
+# PROJECT 1 :
+
 <img src="images/base.jpg">
 
 ## OBJECTIVE: VM automation locally
@@ -172,4 +174,93 @@ RECAP:
 2) confirmed NGINX server, able to log into service - DB confirms it is working
 3) destroy stack 
 
-## NOW AUTOMATE SETUP:
+### NOW AUTOMATE SETUP:
+#### I have automated local set up, so its :
+* repeatable
+* automated
+* IaaC 
+<hr>
+<img src="images/vagrant_1.PNG">
+1) Vagrant file has shell script files that will execute to initialize services: 
+* mysql.bash - will automatically create DB, initialize DB, take care of  firewall rules 
+* Then set up memcache services - centos7 "memcache.sh" - install memache, and check up and running 
+* then rabbit mq 
+* then tomcat - will also set up application / build and deploy - isntalls dependencies - jdk, tomcat/ copy artifact
+ - tomcat shell script will copy application.properties file
+* Then NGINX 
+* IMPORTANT* - copy application.properties file -- every file will be syncd with vagrant/application.properties
+* need to make sure application.properties need to ensure backend config info is correct*
+
+1) Vagrant up - VM are up 
+2) Validated that it works
+3) run 'Vagrant halt' powers off stack
+4) Vagrant does provisioning once, when created / when 'vagrant up' will bring VM's back on
+
+<hr>
+
+# PROJECT 2: LIFT & SHIFT APPLICATION WORKLOAD
+<img src="images/Project_2/project_2_main.png">
+
+* multi-tier web app stack using Vagrant
+* will host and run on AWS Cloud
+* LIFT AND SHIFT STRATEGY
+
+### CONCEPT:
+* application services on servers/VM (postgres, DNS, etc)
+* Have work load in datacenter
+* lots of servers running locally
+
+### PROBLEM:
+* need Virtualization team, DC OPS MOnitoring, System admin team
+* complex if need to scale up/down
+* upfront use cost and maintenance cost
+* most processes will be manual, but diff to automate
+* very time consuming
+  
+### SOLUTION:
+#### Cloud set up 
+* benefits : pay as you go, IAAS, flexibility
+* easy to manage
+* we can automate to remove human errors
+* save costs/time
+  
+### SERVICES:
+* AWS ACM - 'https connection'
+* EC2 instances - for Tomcat instances / RabbitMQ, Memcache, Mysql
+* ELB load balance
+* autoscaling group for Tomcat ec2 instances
+* S3 storage - store software artifacts
+* route 53 - DNS private zones
+* separat security groups for ELB, Tomcat
+
+### Benefits: 
+1) flexible infrastucture 
+2) no upfront cost
+3) modernize effectiveley
+4)  IAAC
+
+### WORK FLOW:
+1) login AWS
+2) create key pairs
+3) create security groups
+4) launch ec2 isntances w/ user data [bash scripts]
+5) update ip to name mpapping with route 53
+6) build application from source code
+7) upload artifact to S3 bucket
+8) setup ELB w/ https connection
+9) map elb endpoint to DNS
+10) verify
+
+## STEP 1: Create Security group
+<img src="images/Project_2/security_group.PNG">
+1) Create security group for ELB (allow HTTP (80) and HTTPS (443) for IPv4 and IPv6)
+2) Create SG for Tomcat - (allow traffic from ELB)
+3) Create SG for backend :
+
+* Open port 3306 - allow tomcat to connect to DB
+* Open port 11211 - allow tomcat to connect ot memcache
+* open port 5672 allow tomcat to connect to RabbitMQ
+* Allow internal traffic to flow on ports
+ 
+4) Create keypair 
+
