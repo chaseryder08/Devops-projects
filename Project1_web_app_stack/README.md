@@ -2,7 +2,7 @@
 
 # PROJECT 1 :
 
-<img src="images/base.jpg">
+<img src="images/Project_1/base.jpg">
 
 ## OBJECTIVE: VM automation locally
 
@@ -61,7 +61,7 @@ Once stack ready, verified as user from browser, accessed nginx service then fow
 > need to install vagrant plugin before bringing up VM:
 "vagrant plugin install vagrant-hostmanager"
 
-<img src="images/VM_spinup.PNG">
+<img src="images/Project_1/VM_spinup.PNG">
 
 #### STEP 2: Spin up Virtual Machines
 > command - "Vagrant up" (Turns on all VM)
@@ -69,7 +69,7 @@ Once stack ready, verified as user from browser, accessed nginx service then fow
 * takes a while to spin up all VM
 * can see VM in Virtual box manager 
 
-<img src="images/vm_spunup_list.PNG">
+<img src="images/Project_1/vm_spunup_list.PNG">
 
 #### STEP3: Confirm VM up/pinging/check /etc/hosts file
 
@@ -101,8 +101,8 @@ Once stack ready, verified as user from browser, accessed nginx service then fow
 2) yum install epel- release & memcached
 3) systemctl start memcached / enable
 4) memcached -p 11211 -u 11111 -u memcached -d (allows to listen to port )
-<img src="images/mc_port_open.PNG">
-5) ss -tunlp | grep 11211 - confirm memcache port is open on 11211
+<img src="images/Project_1/mc_port_open.PNG">
+1) ss -tunlp | grep 11211 - confirm memcache port is open on 11211
 
 ### STEP 6: login into Rabbit MQ - set up server
 1) login to rmq (rabbit MQ server) / yum update
@@ -124,9 +124,9 @@ Once stack ready, verified as user from browser, accessed nginx service then fow
 5) nav to /tmp folde - download tomcat package
 6) extract tomcat package
 7) create user for tomcat and home dir (copy all tomcat binaries) /usr/local/tomcat8
-<img src="images/tomcat_copy.PNG">
-8) change ownership to tomcat user > "chown tomcat.tomcat /usr/local/tomcat8 -R (everything owner by tomcat user)
-9) Setup systemd for tomcat
+<img src="images/Project_1/tomcat_copy.PNG">
+1) change ownership to tomcat user > "chown tomcat.tomcat /usr/local/tomcat8 -R (everything owner by tomcat user)
+2) Setup systemd for tomcat
 > update file with content : 
 <br>
 <code>[Unit]
@@ -146,8 +146,8 @@ SyslogIdentifier=tomcat-%i
 WantedBy=multi-user.target
 * This runs this bash script upon boot up of tomcat*
 </code>
-10) systemctl daemon-reload (this saves any changes to service files)
-11) systemctl enable tomcat
+1)  systemctl daemon-reload (this saves any changes to service files)
+2)  systemctl enable tomcat
 
 ### STEP : CODEBUILD & DEPLOY (app01)
 1) git clone -b local-setup https://github.com/devopshydclub/vprofile-project.git
@@ -180,7 +180,7 @@ RECAP:
 * automated
 * IaaC 
 <hr>
-<img src="images/vagrant_1.PNG">
+<img src="images/Project_1/vagrant_1.PNG">
 1) Vagrant file has shell script files that will execute to initialize services: 
 * mysql.bash - will automatically create DB, initialize DB, take care of  firewall rules 
 * Then set up memcache services - centos7 "memcache.sh" - install memache, and check up and running 
@@ -198,7 +198,7 @@ RECAP:
 
 <hr>
 
-# PROJECT 2: LIFT & SHIFT APPLICATION WORKLOAD
+## PROJECT 2: LIFT & SHIFT APPLICATION WORKLOAD
 <img src="images/Project_2/project_2_main.png">
 
 * multi-tier web app stack using Vagrant
