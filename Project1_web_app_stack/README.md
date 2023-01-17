@@ -261,6 +261,38 @@ RECAP:
 * Open port 11211 - allow tomcat to connect ot memcache
 * open port 5672 allow tomcat to connect to RabbitMQ
 * Allow internal traffic to flow on ports
- 
+</ui>
 4) Create keypair 
 
+
+### STEP 2: Provision services
+<img src="images/Project_2/launch_db.PNG">
+1) Launch DB01 instance 
+- spin up Centos7 from AWS marketplace
+- input userdata from mysql.bash 
+- security group - SG-backend'
+- edit inbound SG rules to allow SSH port 22 from my IP address*
+<img src="images/Project_2/allow_ssh.PNG">
+2) Launch RabbitMq server - confirm
+3) Launch memcached server - confirm up and running in right port 
+<img src="images/Project_2/confirm_mem_port.PNG"></img>
+
+#### Confirmed back end stack is set up and running 
+
+<hr>
+
+1) Copied IP address for 3 servers
+2) created private hosted zone for back end servers
+3) Created A Records for all three servers, named to IP mapping which will be used by Tomcat EC2 instance (use these names instead of IP addresses)
+
+<img src="images/Project_2/config_records.PNG">
+
+4) Launched Tomcat EC2 server
+
+### STEP 3: Create Artifact store on AWS S3
+<img src="images/Project_2/artifact.PNG">
+1) Generate artifact - mvn install
+2) Build successful - created target folder, and artifact
+3) awscli installed on local computer
+4) add new S3 user on IAM / download access key/credential file
+5) 
