@@ -295,4 +295,8 @@ RECAP:
 2) Build successful - created target folder, and artifact
 3) awscli installed on local computer
 4) add new S3 user on IAM / download access key/credential file
-5) 
+5) configure awscli
+6) create s3 bucket - aws s3 mb s3://vprofile-artifact-storage-cb
+7) copied artifact into new S3 bucket
+<img src="images/Project_2/s3_artifact_cp.PNG">
+9) 

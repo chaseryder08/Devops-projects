@@ -290,9 +290,36 @@ RECAP:
 4) Launched Tomcat EC2 server
 
 ### STEP 3: Create Artifact store on AWS S3
-<img src="images/Project_2/artifact.PNG">
+<img src="images/Project_2/artifact.PNG"></img>
 1) Generate artifact - mvn install
 2) Build successful - created target folder, and artifact
 3) awscli installed on local computer
 4) add new S3 user on IAM / download access key/credential file
-5) 
+5) Created new IAM role to provide S3FullAccess policy for app01 Instance. Provides EC2 access to S3 bucket.
+6) Added SSH permission to app01 instance - ssh into machine
+7) install awscli, copy artifact to app01 machine
+<img src="images/Project_2/app_cp_artifact.PNG">
+8) Copy artifact to /var/lib/tomcat8/webbaps/ROOT.war - becomes default application
+9) systemctl start tomcat8 service 
+10) Confirm extracted root directory/artifact and application.properites file
+
+### STEP 4: Create Elastic Load Balancer
+1) Create new subnet in US-east-1b
+2) create private target group
+3) create load balancer
+* port 80 and 443 sending traffic to target group
+* select ACM - cloudtechmonk.com (This was previously created for domain name - using this for educational purposes at this time)
+
+4) Copy endpoint/dns name, and add C NAME record to DNS Route 53
+
+### STEP 5: ALB
+1) STILL NEED TO DO*
+
+SUMMARY:
+1) User access app through URL that points to load balancer end point
+2) HTTPS connection, access ALB endpoint, certificate in ACM, application load balancer in Security group that only allows HTTPs 443 traffic
+3) Forwards traffic to Tomcat EC2 instance on port 808 in different security group
+4) Back end servers access in separate security group (memcache, Mysql RabbitMQ), 
+5) When want can upload new artifcat to S3 bucket and then download to Tomcat EC2 instances.
+
+# PROJECT 3: REFACTORING WITH AWS
