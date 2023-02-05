@@ -1,4 +1,4 @@
-# Jenkins CI and Tools - Project 2 
+# Project 5: Jenkins CI and Tools
 
 ![img](img/jenkins_main.PNG)
 
