@@ -67,3 +67,22 @@
    - open port 22, 8081 from my IP, and 8081 from Jenkins (so jenkins can upload artifact to nexus server)
 4) Create Sonar -SG
 - open port 22, and port 80 from Jenkins SG (Jenkins upload test result on port 80 )
+
+# STEP 2: setup Jenkins: 
+1) install jdk8 in cli (already have jdk11 installed)
+- in jenkins set java home for : /usr/lib/jvm/java-1.8.0-openjdk-amd64
+so we use jdk8 not 11
+2) add credentials in jenkins for nexus to connect and upload artifact
+* admin/nexuslogin
+3) update Jenkins file / start fresh
+- declares tools :maven, jdk8
+- Stage : build
+- steps {
+	sh 'mvn -s settings.xml -DskipTests install' 
+(this will skill tests)*
+
+4) Maven will get nexus creds from settings.xml file; define variables in jenkins file ;
+5) set up new jenkins job / run build with Nexus - get necessary dependencies 
+6) Next need to set up github webhook to automate build process when commit to github repo
+7) 
+
