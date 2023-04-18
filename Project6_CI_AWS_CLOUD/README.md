@@ -1,5 +1,5 @@
 # Project 7: Continuous Integration on AWS
-![img](arch.PNG)
+![img](img/arch.PNG)
 > Agile team makes regular code changes daily; code needs to be tested as it's what creating product
 - usually have build/release team to do job
 - time consuming for team to fix bugs
