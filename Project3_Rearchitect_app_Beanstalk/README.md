@@ -1,5 +1,5 @@
 # PROJECT 3: REFACTORING WITH AWS
-<img src="images/Project_3/project_3.jpg"></img>
+<img src="img/project_3.jpg"></img>
 - Refactoring/Rearchitecture our services :
 - Architecture to boost agility or improve business continuity : (allows to add new features, and give us good performance for your application workload)
 
@@ -34,14 +34,14 @@ BACKEND:
 2) Create security group for back end to allow all traffic within instance
 
 ### STEP 2: Create backend services : RDS
-<img src="images/Project_3/param_group.PNG">
+<img src="img/param_group.PNG">
 1) Create DB Subnet group
 2) Create Parameter group 
    - using mysql5.7
    - left db settings to default
 3) Create MySQL RDS Instance - free tier 
    - user: admin pass: Vib9qeabEbuQOOOefOOG
-<img src="images/Project_3/db_create.PNG"></img>
+<img src="img/db_create.PNG"></img>
 
 ### STEP 3: Create ELasticache instance
 1) Create Elasticache instance - in memory cache
@@ -52,7 +52,7 @@ BACKEND:
 1) Create instance - free tier micro3
 2) Set as private access - privately accessing RMQ
 
-<img src="images/Project_3/rds.PNG"></img>
+<img src="img/rds.PNG"></img>
 
 3) Create temporary EC2 to initialize DB the terminate
 4) login into machine - install mysql-client
@@ -62,7 +62,7 @@ BACKEND:
 8) Initalized DB with schema | Confirmed 3 tables created 
 - confirms RDS initialized
 9) Grab details of back end services - including endpoints, port numbers
-<img src="images/Project_3/show_tables_mysql.PNG">
+<img src="img/show_tables_mysql.PNG">
 
 ### STEP 5: Create Elastic Beanstalk
 1) Create Elastic Beanstalk instance where hosting application

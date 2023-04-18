@@ -1,5 +1,5 @@
 ## PROJECT 2: LIFT & SHIFT APPLICATION WORKLOAD
-<img src="images/Project_2/project_2_main.png">
+<img src="img/project_2_main.png">
 
 * multi-tier web app stack using Vagrant
 * will host and run on AWS Cloud
@@ -52,7 +52,7 @@
 10) verify
 
 ## STEP 1: Create Security group
-<img src="images/Project_2/security_group.PNG">
+<img src="img/security_group.PNG">
 1) Create security group for ELB (allow HTTP (80) and HTTPS (443) for IPv4 and IPv6)
 2) Create SG for Tomcat - (allow traffic from ELB)
 3) Create SG for backend :
@@ -66,16 +66,16 @@
 
 
 ### STEP 2: Provision services
-<img src="images/Project_2/launch_db.PNG">
+<img src="img/launch_db.PNG">
 1) Launch DB01 instance 
 - spin up Centos7 from AWS marketplace
 - input userdata from mysql.bash 
 - security group - SG-backend'
 - edit inbound SG rules to allow SSH port 22 from my IP address*
-<img src="images/Project_2/allow_ssh.PNG">
+<img src="img/allow_ssh.PNG">
 2) Launch RabbitMq server - confirm
 3) Launch memcached server - confirm up and running in right port 
-<img src="images/Project_2/confirm_mem_port.PNG"></img>
+<img src="img/confirm_mem_port.PNG"></img>
 
 #### Confirmed back end stack is set up and running 
 
@@ -85,12 +85,12 @@
 2) created private hosted zone for back end servers
 3) Created A Records for all three servers, named to IP mapping which will be used by Tomcat EC2 instance (use these names instead of IP addresses)
 
-<img src="images/Project_2/config_records.PNG">
+<img src="img/config_records.PNG">
 
 4) Launched Tomcat EC2 server
 
 ### STEP 3: Create Artifact store on AWS S3
-<img src="images/Project_2/artifact.PNG"></img>
+<img src="img/artifact.PNG">
 1) Generate artifact - mvn install
 2) Build successful - created target folder, and artifact
 3) awscli installed on local computer
@@ -98,10 +98,10 @@
 5) Created new IAM role to provide S3FullAccess policy for app01 Instance. Provides EC2 access to S3 bucket.
 6) Added SSH permission to app01 instance - ssh into machine
 7) install awscli, copy artifact to app01 machine
-<img src="images/Project_2/app_cp_artifact.PNG">
-8) Copy artifact to /var/lib/tomcat8/webbaps/ROOT.war - becomes default application
-9) systemctl start tomcat8 service 
-10) Confirm extracted root directory/artifact and application.properites file
+<img src="img/app_cp_artifact.PNG">
+1) Copy artifact to /var/lib/tomcat8/webbaps/ROOT.war - becomes default application
+2) systemctl start tomcat8 service 
+3)  Confirm extracted root directory/artifact and application.properites file
 
 ### STEP 4: Create Elastic Load Balancer
 1) Create new subnet in US-east-1b

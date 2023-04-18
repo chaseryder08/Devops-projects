@@ -33,4 +33,25 @@
 
 ## STEP 1: CodeCommit
 1) Create codecommit repo
-2) 
+2) Create codecommit user 
+3) create policy with all code commit privilege
+4) Create/generate ssh key from local machine
+![img](img/ssh_key.PNG)
+5) Create ssh config file, codecommit will use this config file to access 
+![img](img/config.PNG)
+
+## STEP 2: clone sourcecode to codecommit
+1) clone repo from github, and push to codecommit
+![img](img/remote_change.PNG)
+![img](img/sc.PNG)
+
+## STEP 3: Create CodeArtifact:
+![img](img/ca-repo.PNG)
+- create repository which used for Maven build job and download dependencies
+1) create IAM user admin for codeartifact
+2) set up local awscli credentials with code-artifact user
+3) change pom/settings.xml file with proper url information
+4) Sonarcloud.io (similar to sonarqube) -- generate token, start new project
+5) Parameter store - create parameters
+![img](img/parameters.PNG)
+6) Add sonar policy on IAM role gives privladges to use SSM Parameter Store*, which is needed for build job
